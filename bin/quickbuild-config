@@ -1,3 +1,13 @@
 #!/usr/bin/env ruby
 
 require "quickbuild/config"
+
+module Quickbuild::Config
+
+  cliOptions = RunnerOptions.new(ARGV)
+
+  runner = Runner.new(cliOptions)
+  action_factory = Action::Factory.new(RequestHandler.new, Request::Factory.new, NetrcCredentials.new)
+  runner.run(action_factory)
+
+end
