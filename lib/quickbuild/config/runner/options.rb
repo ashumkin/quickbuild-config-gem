@@ -1,10 +1,15 @@
 require 'optparse'
 require 'logger'
 require 'quickbuild/config/variables'
+require 'quickbuild/error'
 require 'quickbuild/helpers/logger_helper'
 
 module Quickbuild
   module Config
+
+    class RunnerOptionsHelp < Quickbuild::Error::CustomError
+    end
+
     class RunnerOptions < OptionParser
       attr_reader :server, :configurations, :action, :variables, :logger
 
@@ -41,13 +46,8 @@ module Quickbuild
       end
 
       def parse_and_validate(argv)
-        begin
-          parse! argv
-          validate argv
-        rescue
-          warn $!
-          exit 1
-        end
+        parse! argv
+        validate argv
       end
 
       def validate(argv)
@@ -83,8 +83,7 @@ module Quickbuild
         end
 
         on_tail('-h', '--help', 'Shows this help') do
-          puts help
-          exit 1
+          raise RunnerOptionsHelp.new help
         end
 
       end

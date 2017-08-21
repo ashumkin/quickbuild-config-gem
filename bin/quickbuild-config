@@ -1,13 +1,27 @@
 #!/usr/bin/env ruby
 
+require 'bundler/setup'
 require "quickbuild/config"
 
 module Quickbuild::Config
 
-  cliOptions = RunnerOptions.new(ARGV)
+  begin
 
-  runner = Runner.new(cliOptions)
-  action_factory = Action::Factory.new(RequestHandler.new, Request::Factory.new, NetrcCredentials.new)
-  runner.run(action_factory)
+    cliOptions = RunnerOptions.new(ARGV)
+
+    runner = Runner.new(cliOptions)
+    action_factory = Action::Factory.new(RequestHandler.new, Request::Factory.new, NetrcCredentials.new)
+    runner.run(action_factory)
+  rescue Quickbuild::Error::UnsupportedAction => e
+    puts cliOptions.help
+    exit 1
+  rescue Quickbuild::Error::CustomError => e
+    warn e.message
+    exit 1
+  rescue Exception => e
+    warn e.message
+    warn e.backtrace
+    exit 2
+  end
 
 end

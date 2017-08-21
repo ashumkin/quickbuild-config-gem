@@ -1,13 +1,16 @@
 
 module Quickbuild::Error
 
-  class UnsupportedAction < Exception
+  class CustomError < Exception
   end
 
-  class UnsupportedRequestType < Exception
+  class UnsupportedAction < CustomError
   end
 
-  class NoConfigurationByPath < Exception
+  class UnsupportedRequestType < CustomError
+  end
+
+  class NoConfigurationByPath < CustomError
     def initialize(configuration_path)
       super('No configuration for path %s' % configuration_path)
     end

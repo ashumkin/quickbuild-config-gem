@@ -9,14 +9,8 @@ module Quickbuild
       end
 
       def run(action_factory)
-        begin
-          action = action_factory.create(@opts)
-          action.run
-        rescue Exception => e
-          warn e.message
-          warn e.backtrace if @opts.logger_level_is_debug?
-          exit 1
-        end
+        action = action_factory.create(@opts)
+        action.run
       end
 
     end
