@@ -9,7 +9,7 @@ module Quickbuild
       end
 
       def run(action_factory, result_saver)
-        action = action_factory.create(@opts)
+        action = action_factory.create(@opts.action, @opts)
         action.run(result_saver)
       end
 

@@ -27,6 +27,22 @@ RSpec.describe RunnerOptions do
 
   end
 
+  context 'Export config action' do
+
+    it 'applies option --export' do
+      expect(RunnerOptions.new ['--export']).not_to be nil
+    end
+
+  end
+
+  context 'LIST configs action' do
+
+    it 'applies option --list' do
+      expect(RunnerOptions.new ['--list']).not_to be nil
+    end
+
+  end
+
   context 'CONFIGURATIONS' do
 
     it 'enumerates configurations' do

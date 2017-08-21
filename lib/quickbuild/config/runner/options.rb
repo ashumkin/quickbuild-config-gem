@@ -70,6 +70,14 @@ module Quickbuild
         separator 'Options:'
         separator ''
 
+        on('-e', '--export', 'Export configuration(s) to XML file(s)') do |s|
+          @action = :export
+        end
+
+        on('-l', '--list', 'List configuration(s)') do |s|
+          @action = :list
+        end
+
         on('-s', '--server SERVER', 'Server URL') do |s|
           @server = s
         end

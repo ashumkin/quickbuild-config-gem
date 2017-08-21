@@ -2,10 +2,10 @@ module Quickbuild::Config::Action
 
   class Custom
 
-    def initialize(options, request_handler, request_factory, credentials_helper)
+    def initialize(options, factory, request_handler, request_factory, credentials_helper)
       @opts = options
       @logger = options.logger
-      @request_handler, @request_factory, @credentials_helper = request_handler, request_factory, credentials_helper
+      @factory, @request_handler, @request_factory, @credentials_helper = factory, request_handler, request_factory, credentials_helper
     end
 
     def do_request(type, extras)
@@ -30,7 +30,7 @@ module Quickbuild::Config::Action
     end
 
     def save_result(result_saver, configuration, value)
-      result_saver.save(configuration, value)
+      result_saver.save(configuration, value) if result_saver
     end
 
     def run(result_saver)
