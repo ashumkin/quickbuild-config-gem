@@ -20,12 +20,12 @@ RSpec.describe Runner do
     context 'run build' do
       FAKE_CONFIG_ID = '100'
 
-      let(:root_example1) do
+      let(:runner_run_build_root_example1) do
         cliOptions = RunnerOptions.new ['--run-build', 'root/example']
         Runner.new(cliOptions)
       end
 
-      let(:root_example2) do
+      let(:runner_run_build_root_example2) do
         cliOptions = RunnerOptions.new ['--run-build', 'root/example2']
         Runner.new(cliOptions)
       end
@@ -58,7 +58,7 @@ RSpec.describe Runner do
 
         mock_action_factory = Action::Factory.new(mock_request_handler, mock_request_factory, mock_credentials)
 
-        expect(root_example1.run(mock_action_factory)).to eql(FAKE_CONFIG_ID)
+        expect(runner_run_build_root_example1.run(mock_action_factory)).to eql(FAKE_CONFIG_ID)
       end
 
       let(:mock_run_build_response) do
@@ -89,7 +89,7 @@ RESPONSE
         allow(mock_request_handler).to receive(:execute_request).with(instance_of(Request::RunBuild), any_args).and_return(mock_run_build_response)
 
         mock_action_factory = Action::Factory.new(mock_request_handler, mock_request_factory, mock_credentials)
-        expect(root_example2.run(mock_action_factory)).to eql('build request GUID')
+        expect(runner_run_build_root_example2.run(mock_action_factory)).to eql('build request GUID')
       end
 
     end
