@@ -15,7 +15,7 @@ module Quickbuild::Config::Request
 
     def initialize(server, configuration_id, variables)
       @configuration_id = configuration_id
-      @url = '%s/rest/build_requests' % [server, @configuration_id]
+      @url = '%s/rest/build_requests' % server
       @promotion_build_id = nil
       @variables = variables
     end
