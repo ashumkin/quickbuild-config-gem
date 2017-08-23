@@ -2,9 +2,9 @@ require 'net/http'
 require 'netrc'
 require 'quickbuild/helpers/net/http'
 
-module Quickbuild::Config
+module Quickbuild::Config::Request
 
-  class RequestHandler
+  class Handler
 
     def execute_request(request, credentials_helper, turn_on_debugging = false)
       uri = URI(request.url)

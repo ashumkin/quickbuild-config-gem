@@ -10,7 +10,7 @@ module Quickbuild::Config
     cliOptions = RunnerOptions.new(ARGV)
 
     runner = Runner.new(cliOptions)
-    action_factory = Action::Factory.new(RequestHandler.new, Request::Factory.new, NetrcCredentials.new)
+    action_factory = Action::Factory.new(Request::Handler.new, Request::Factory.new, NetrcCredentials.new)
     runner.run(action_factory)
   rescue Quickbuild::Error::UnsupportedAction => e
     puts cliOptions.help
