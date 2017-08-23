@@ -6,7 +6,7 @@ module Quickbuild::Config
 RSpec.describe Request::GetConfigurationID do
 
   subject do
-    Request::GetConfigurationID.new(:server, :name)
+    Request::GetConfigurationID.new(server: :server, configuration: :name)
   end
 
   describe '#request_method' do

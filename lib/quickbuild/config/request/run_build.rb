@@ -13,7 +13,13 @@ module Quickbuild::Config::Request
 
   class RunBuild < Custom
 
-    def initialize(server, configuration_id, variables)
+    Factory.register(self)
+
+    def initialize(params)
+      initialize_with_server(params[:server], params[:configuration_id], params[:variables])
+    end
+
+    def initialize_with_server(server, configuration_id, variables)
       @configuration_id = configuration_id
       @url = '%s/rest/build_requests' % server
       @promotion_build_id = nil
@@ -26,6 +32,10 @@ module Quickbuild::Config::Request
 
     def request_method
       :post
+    end
+
+    def self.type
+      :run_build
     end
 
     def variables

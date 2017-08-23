@@ -17,7 +17,7 @@ module Quickbuild::Config::Request
   class Custom
     attr_reader :url
 
-    def initialize
+    def initialize(params)
       @url = nil
     end
 
@@ -28,6 +28,13 @@ module Quickbuild::Config::Request
       :get
     end
 
+    def self.type
+      raise "Please, derive #{self.name}.type"
+    end
+
+    def self.oftype?(type)
+      self.type.eql? type
+    end
   end
 
 end

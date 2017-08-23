@@ -6,18 +6,24 @@ RSpec.describe Request::Factory do
 
   describe '#create' do
 
-    it 'creates get_configuration_id' do
-      options = RunnerOptions.new ['--run-build', '--server', 'SERVER', 'root']
-      request = Request::GetConfigurationID.new('SERVER', 'root')
+    let(:run_options) do
+      RunnerOptions.new ['--run-build', '--server', 'SERVER', 'root']
+    end
 
-      expect(subject.create(:get_configuration_id, options).url).to eql(request.url)
+    let(:params_from_run_options) do
+      { server: run_options.server, configuration: run_options.configurations.first }
+    end
+
+    it 'creates get_configuration_id' do
+      request = Request::GetConfigurationID.new(server: 'SERVER', configuration: :root)
+
+      expect(subject.create(:get_configuration_id, params_from_run_options).url).to eql(request.url)
     end
 
     it 'creates run_build' do
-      options = RunnerOptions.new ['--run-build', '--server', 'SERVER', 'root']
-      request = Request::RunBuild.new('SERVER', 'root', VariableList.new)
+      request = Request::RunBuild.new(server: 'SERVER', configuration_id: 'root', variables: VariableList.new)
 
-      expect(subject.create(:run_build, options).url).to eql(request.url)
+      expect(subject.create(:run_build, params_from_run_options).url).to eql(request.url)
     end
 
   end

@@ -15,13 +15,23 @@ module Quickbuild::Config::Request
   class GetConfigurationID < Custom
     attr_reader :configuration_path
 
-    def initialize(server, configuration_path)
+    Factory.register(self)
+
+    def initialize(params)
+      initialize_with_server(params[:server], params[:configuration])
+    end
+
+    def initialize_with_server(server, configuration_path)
       @configuration_path = configuration_path
       @url = '%s/rest/ids?configuration_path=%s' % [server, @configuration_path]
     end
 
     def response_handler
       GetConfigurationIDResponseHandler.new(self)
+    end
+
+    def self.type
+      :get_configuration_id
     end
 
   end
