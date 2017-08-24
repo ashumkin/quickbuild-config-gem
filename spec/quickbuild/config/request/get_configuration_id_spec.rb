@@ -11,7 +11,7 @@ RSpec.describe Request::GetConfigurationID do
 
   describe '#request_method' do
 
-    it 'should be GET' do
+    it 'request_method is GET' do
       expect(subject.request_method).to eql :get
     end
 
@@ -19,7 +19,7 @@ RSpec.describe Request::GetConfigurationID do
 
   describe '#response_handler' do
 
-    it 'should raise an error while handling an empty response' do
+    it 'raises an error while handling an empty response' do
       mock_response_empty = double('empty response')
       allow(mock_response_empty).to receive(:body).and_return('')
 

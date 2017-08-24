@@ -9,7 +9,7 @@ RSpec.describe Variable do
   end
 
   describe '#to_xml' do
-    it 'should be entry' do
+    it 'returns an entry' do
       expect(subject.to_xml).to eql '<entry><string>foo</string><string>bar</string></entry>'
     end
   end
@@ -20,11 +20,11 @@ RSpec.describe VariableList do
 
   describe '#to_xml' do
 
-    it 'should be empty' do
+    it 'is empty' do
       expect(subject.to_xml).to eql ''
     end
 
-    it 'should contain 2 variables' do
+    it 'contains 2 variables' do
       subject << Variable.new(:var, :value)
       subject << Variable.new(:foo, :bar)
       expect(subject.to_xml).to eql <<VARS

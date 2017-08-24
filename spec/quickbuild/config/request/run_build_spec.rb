@@ -6,7 +6,7 @@ RSpec.describe Request::RunBuild do
 
   describe '#request_method' do
 
-    it 'should be POST' do
+    it 'request_method is POST' do
       request = Request::RunBuild.new(:server, :id, VariableList.new)
       expect(request.request_method).to eql :post
     end

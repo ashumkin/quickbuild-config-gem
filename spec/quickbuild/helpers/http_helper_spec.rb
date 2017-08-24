@@ -12,11 +12,11 @@ RSpec.describe Net::HTTPResponse do
   end
 
   describe '#ok?' do
-    it 'should be OK' do
+    it 'is OK' do
       expect(response_ok.ok?).to eql true
     end
 
-    it 'should NOT be OK' do
+    it 'is NOT OK' do
       expect(response_not_ok.ok?).to eql false
     end
   end
