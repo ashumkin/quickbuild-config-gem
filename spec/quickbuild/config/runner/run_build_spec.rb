@@ -50,7 +50,10 @@ RESPONSE
       let(:mock_request_handler) do
         mock_request_handler = double('root/example')
         allow(mock_request_handler).to receive(:execute_request).with(instance_of(Request::GetConfigurationID), any_args).and_return(mock_get_configuration_id_response)
-        allow(mock_request_handler).to receive(:execute_request).with(instance_of(Request::RunBuild), any_args).and_return(mock_run_build_response)
+        allow(mock_request_handler).to receive(:execute_request).with(instance_of(Request::RunBuild), any_args) do |request|
+          expect(request.configuration_id).to eql FAKE_CONFIG_ID
+          mock_run_build_response
+        end
         mock_request_handler
       end
 

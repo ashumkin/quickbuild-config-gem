@@ -16,9 +16,11 @@ module Quickbuild::Config::Request
 
   class Custom
     attr_reader :url
+    attr_reader :configuration_id
 
     def initialize(params)
       @url = nil
+      @configuration_id = nil
     end
 
     def response_handler
