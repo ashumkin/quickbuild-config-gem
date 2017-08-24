@@ -6,7 +6,7 @@ module Quickbuild::Config
     def get_credentials_for(uri)
       netrc = Netrc.read
       credentials = netrc[uri.host]
-      return credentials.login, credentials.password if credentials
+      return {login: credentials.login, password: credentials.password} if credentials
     end
 
   end

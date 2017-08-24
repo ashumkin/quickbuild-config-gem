@@ -18,7 +18,7 @@ RSpec.describe Runner do
       end
 
       let(:mock_credentials) do
-        allow(double('mock_credentials')).to receive(:get_credentials_for).and_return([nil, nil])
+        allow(double('mock_credentials')).to receive(:get_credentials_for).and_return({login: nil, password: nil})
       end
 
       let(:mock_request_factory) do

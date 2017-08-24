@@ -19,8 +19,8 @@ module Quickbuild::Config::Request
         else
           http_request = Net::HTTP::Get.new uri.request_uri
         end
-        user, password = credentials_helper.get_credentials_for(uri)
-        http_request.basic_auth user, password if user && password
+        credentials = credentials_helper.get_credentials_for(uri)
+        http_request.basic_auth credentials[:login], credentials[:password] if credentials
 
         response = ht.request http_request
         return response
