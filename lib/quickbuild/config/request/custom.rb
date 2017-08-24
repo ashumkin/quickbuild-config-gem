@@ -28,6 +28,10 @@ module Quickbuild::Config::Request
       :get
     end
 
+    def handle_response(response)
+      response_handler.handle(response)
+    end
+
     def self.type
       raise "Please, derive #{self.name}.type"
     end

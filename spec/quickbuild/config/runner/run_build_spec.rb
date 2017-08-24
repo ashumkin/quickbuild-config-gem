@@ -1,6 +1,7 @@
 require "spec_helper"
 require 'quickbuild/config/runner'
 require 'quickbuild/config/runner/options'
+require 'quickbuild/config/result_saver'
 
 module Quickbuild::Config
 
@@ -53,9 +54,15 @@ RESPONSE
         mock_request_handler
       end
 
+      let(:mock_result_saver) do
+        result_saver = double('result_saver')
+        allow(result_saver).to receive(:save)
+        result_saver
+      end
+
       it "runs a build: root/example" do
         mock_action_factory = Action::Factory.new(mock_request_handler, mock_request_factory, mock_credentials)
-        expect(runner_run_build_root_example.run(mock_action_factory)).to eql('build request GUID')
+        expect(runner_run_build_root_example.run(mock_action_factory, mock_result_saver)).to eql('build request GUID')
       end
 
     end

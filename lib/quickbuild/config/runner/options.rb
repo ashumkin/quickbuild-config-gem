@@ -25,7 +25,7 @@ module Quickbuild
         @server = ENV['QB_SERVER_PATH']
         @configurations = []
         @variables = VariableList.new
-        @logger = Logger.new(STDOUT)
+        @logger = Logger.new(STDERR)
         self.logger_level = Logger::WARN
       end
 
