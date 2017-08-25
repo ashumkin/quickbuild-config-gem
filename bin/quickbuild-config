@@ -12,7 +12,8 @@ module Quickbuild::Config
 
     runner = Runner.new(cliOptions)
     action_factory = Action::Factory.new(Request::Handler.new, Request::Factory.new, NetrcCredentials.new)
-    runner.run(action_factory, ResultSaver.new($stdout))
+    result_saver = ResultSaver.create_by_output(cliOptions.output)
+    runner.run(action_factory, result_saver)
   rescue Quickbuild::Error::UnsupportedAction => e
     puts cliOptions.help
     exit 1

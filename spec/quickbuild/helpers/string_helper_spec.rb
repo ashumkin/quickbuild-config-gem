@@ -68,4 +68,20 @@ SOURCE_XML
 
   end
 
+  describe '#is_stdout' do
+
+    it 'is STDOUT for empty string' do
+      expect(''.is_stdout?).to eql true
+    end
+
+    it 'is STDOUT for "-" string' do
+      expect('-'.is_stdout?).to eql true
+    end
+
+    it 'is NOT STDOUT for any other string' do
+      expect('string'.is_stdout?).to eql false
+    end
+
+  end
+
 end

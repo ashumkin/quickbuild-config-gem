@@ -35,6 +35,20 @@ RSpec.describe RunnerOptions do
 
   end
 
+  context 'OUTPUT option' do
+
+    it 'does not accept option --output with no argument' do
+      expect do
+        RunnerOptions.new ['--output']
+      end.to raise_error OptionParser::MissingArgument
+    end
+
+    it 'applies option --output' do
+      expect(RunnerOptions.new(['--output', 'directory']).output).to eql 'directory'
+    end
+
+  end
+
   context 'LIST configs action' do
 
     it 'applies option --list' do

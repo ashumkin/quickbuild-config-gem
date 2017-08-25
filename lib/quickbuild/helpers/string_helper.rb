@@ -1,5 +1,6 @@
 class String
   ASTERISK = '*'
+  HYPHEN = '-'
 
   def self.asterisk
     ASTERISK
@@ -31,6 +32,10 @@ class String
     else
       self
     end
+  end
+
+  def is_stdout?
+    eql?('') || eql?(HYPHEN)
   end
 
 end

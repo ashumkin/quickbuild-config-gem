@@ -11,7 +11,7 @@ module Quickbuild
     end
 
     class RunnerOptions < OptionParser
-      attr_reader :server, :configurations, :action, :variables, :logger
+      attr_reader :server, :configurations, :action, :variables, :logger, :output
 
       def initialize(argv)
         super()
@@ -25,6 +25,7 @@ module Quickbuild
         @server = ENV['QB_SERVER_PATH']
         @configurations = []
         @variables = VariableList.new
+        @output = nil
         @logger = Logger.new(STDERR)
         self.logger_level = Logger::WARN
       end
@@ -80,6 +81,10 @@ module Quickbuild
 
         on('-s', '--server SERVER', 'Server URL') do |s|
           @server = s
+        end
+
+        on('-o', '--output DIRECTORY', 'Output directory') do |o|
+          @output = o
         end
 
         on('-R', '--run-build', 'Runs build') do
