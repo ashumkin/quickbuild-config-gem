@@ -9,7 +9,7 @@ module Quickbuild::Config
     end
 
     def save(configuration_path, exported_configuration)
-      @device.puts exported_configuration
+      @device.puts exported_configuration.inject_to_xml(configuration_path)
     end
 
     def eql?(object)
