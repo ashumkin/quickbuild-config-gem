@@ -20,6 +20,7 @@ module Quickbuild::Config
   rescue Quickbuild::Error::CustomError => e
     warn e.message
     exit 1
+  rescue SystemExit
   rescue Exception => e
     warn e.message
     warn e.backtrace

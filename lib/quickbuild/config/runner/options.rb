@@ -7,7 +7,13 @@ require 'quickbuild/helpers/logger_helper'
 module Quickbuild
   module Config
 
-    class RunnerOptionsHelp < Quickbuild::Error::CustomError
+    class RunnerOptionsError < Quickbuild::Error::CustomError
+    end
+
+    class RunnerOptionsHelp < RunnerOptionsError
+    end
+
+    class RunnerOptionsVersion < RunnerOptionsError
     end
 
     class RunnerOptions < OptionParser
@@ -21,6 +27,7 @@ module Quickbuild
       end
 
       def set_defaults
+        @version = VERSION
         @action = :none
         @server = ENV['QB_SERVER_PATH']
         @configurations = []
@@ -93,6 +100,10 @@ module Quickbuild
 
         on('-v', '--verbose', 'Be verbose') do |v|
           self.logger_level = self.logger_level - 1
+        end
+
+        on_tail('-V', '--version', 'Shows version') do
+          raise RunnerOptionsVersion.new version
         end
 
         on_tail('-h', '--help', 'Shows this help') do
