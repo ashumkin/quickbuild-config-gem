@@ -1,5 +1,6 @@
 
-module Quickbuild::Error
+module Quickbuild
+module Error
 
   class CustomError < Exception
   end
@@ -16,4 +17,5 @@ module Quickbuild::Error
     end
   end
 
+end
 end

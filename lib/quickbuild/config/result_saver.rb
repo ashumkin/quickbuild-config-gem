@@ -1,4 +1,4 @@
-require 'quickbuild/helpers/string_helper'
+require 'quickbuild/config/result_printer'
 require 'quickbuild/config/result_saver/to_directory_saver'
 
 module Quickbuild::Config
@@ -11,8 +11,9 @@ module Quickbuild::Config
       @device = device
     end
 
-    def save(configuration_path, exported_configuration)
-      @device.puts exported_configuration.inject_to_xml(configuration_path)
+    def save(configuration_path, configuration_content)
+      result_printer = create_param_printer
+      @device.puts result_printer.print(configuration_path, configuration_content)
     end
 
     def eql?(object)
@@ -25,6 +26,10 @@ module Quickbuild::Config
       else
         ResultSaverToDirectory.new(output)
       end
+    end
+
+    def create_param_printer
+      ResultPrinter.new
     end
 
   end
@@ -46,7 +51,7 @@ module Quickbuild::Config
       @output = directory
     end
 
-    def save(configuration_path, exported_configuration)
+    def save(configuration_path, configuration_content)
       @device.configuration = configuration_path
       super
     end
