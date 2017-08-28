@@ -36,6 +36,12 @@ RSpec.describe Request::Factory do
       expect(subject.create(:export, params_from_run_options_for_export).url).to eql(request.url)
     end
 
+    it 'creates import' do
+      request = Request::ImportConfiguration.new(server: 'SERVER')
+
+      expect(subject.create(:import, params_from_run_options).url).to eql(request.url)
+    end
+
   end
 
 end

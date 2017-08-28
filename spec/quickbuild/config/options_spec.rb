@@ -49,6 +49,14 @@ RSpec.describe RunnerOptions do
 
   end
 
+  context 'Import config action' do
+
+    it 'applies option --import' do
+      expect(RunnerOptions.new ['--import']).not_to be nil
+    end
+
+  end
+
   context 'LIST configs action' do
 
     it 'applies option --list' do

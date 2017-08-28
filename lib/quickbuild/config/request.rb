@@ -1,5 +1,6 @@
 require 'quickbuild/config/request/get_configuration_id'
 require 'quickbuild/config/request/run_build'
 require 'quickbuild/config/request/export_configuration'
+require 'quickbuild/config/request/import_configuration'
 require 'quickbuild/config/request/list_configurations'
 require 'quickbuild/config/request/get_configuration_path'

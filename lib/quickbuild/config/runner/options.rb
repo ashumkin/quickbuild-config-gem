@@ -78,8 +78,12 @@ module Quickbuild
         separator 'Options:'
         separator ''
 
-        on('-e', '--export', 'Export configuration(s) to XML file(s)') do |s|
+        on('-e', '--export', 'Export configuration(s) to XML file(s)') do
           @action = :export
+        end
+
+        on('-i', '--import', 'Import file to a configuration') do
+          @action = :import
         end
 
         on('-l', '--list', 'List configuration(s)') do |s|
